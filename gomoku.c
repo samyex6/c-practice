@@ -79,7 +79,7 @@ int checkWinning (Board* board, Cell* last_move, int player) {
     };
 
     // checking vertical & horizontal, general processing
-    for (dir = DIR_VERTICAL; dir < DIR_HORIZONTAL; dir++) {
+    for (dir = DIR_VERTICAL; dir <= DIR_HORIZONTAL; dir++) {
         // starting point selection, from top to bottom, left to right, since we are looping for the 
         // next 4 elements from the starting point, this means the selecting process can be terminated
         // after reaching the center.
@@ -106,7 +106,7 @@ int checkWinning (Board* board, Cell* last_move, int player) {
             int interrupted = 0;
             row     = start_row;
             col     = start_col;
-            end_row = end + 4;
+            end_row = row + 4;
             end_col = col + 4;
             for (; row <= end_row && col <= end_col; col++, row += options[dir][2]) {
                 if (getCell(board, row, col) != label) {
@@ -226,8 +226,6 @@ int main () {
                     decision = pickMove(&board, lang[player][2][0]);
                     break;
                 case PLAYER_ME:
-                    //decision = pickMove(&board, lang[player][2][0]);
-                    //break;
                     while (1) {
                         printf("Please pick a move in \"row col\" format: ");
                         scanf("%d %d", &decision.row, &decision.col);
